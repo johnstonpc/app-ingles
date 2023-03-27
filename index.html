@@ -31,6 +31,14 @@
 </main>
 
 
-
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sw.js").then(function(registration) {
+      console.log("Service worker registrado com sucesso:", registration.scope);
+    }).catch(function(error) {
+      console.log("Falha ao registrar o service worker:", error);
+    });
+  }
+</script>
 </body>
 </html>
