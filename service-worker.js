@@ -10,6 +10,7 @@ const urlsToCache = [
   '/funcao.js',
   '/funcaos1.js',
   'img/ingles.png',
+  'https://johnstonpc.github.io/app-ingles/'
    
    
 ];
