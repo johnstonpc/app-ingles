@@ -10,26 +10,30 @@ const urlsToCache = [
   '/funcao.js',
   '/funcaos1.js',
   'img/ingles.png',
-   "https://johnstonpc.github.io/app-ingles/"
+   
    
 ];
 
-self.addEventListener("install", event => {
+
+self.addEventListener("install", function(event) {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then(function(cache) {
+      console.log("Cache aberto");
+      return cache.addAll(urlsToCache);
+    })
   );
 });
 
-self.addEventListener("fetch", event => {
+self.addEventListener("fetch", function(event) {
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response;
-        }
+    caches.match(event.request).then(function(response) {
+      if (response) {
+        console.log("Retornando do cache: ", event.request.url);
+        return response;
+      }
 
-        return fetch(event.request);
-      })
+      console.log("Buscando da rede: ", event.request.url);
+      return fetch(event.request);
+    })
   );
 });
